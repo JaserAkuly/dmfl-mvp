@@ -6,7 +6,7 @@
 -- Create enums
 CREATE TYPE game_status AS ENUM ('scheduled', 'live', 'final', 'postponed');
 CREATE TYPE player_role AS ENUM ('captain', 'co_captain', 'player');
-CREATE TYPE position AS ENUM ('QB', 'WR', 'RB', 'DB', 'LB', 'RUSH', 'FLEX');
+CREATE TYPE player_position AS ENUM ('QB', 'WR', 'RB', 'DB', 'LB', 'RUSH', 'FLEX');
 
 -- Create seasons table
 CREATE TABLE seasons (
@@ -38,8 +38,8 @@ CREATE TABLE players (
     last_name TEXT NOT NULL,
     email TEXT,
     phone TEXT,
-    primary_position position,
-    secondary_position position,
+    primary_position player_position,
+    secondary_position player_position,
     avatar_url TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );

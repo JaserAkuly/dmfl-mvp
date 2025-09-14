@@ -3,7 +3,7 @@ import { z } from 'zod'
 // Enums
 export const GameStatus = z.enum(['scheduled', 'live', 'final', 'postponed'])
 export const PlayerRole = z.enum(['captain', 'co_captain', 'player'])
-export const Position = z.enum(['QB', 'WR', 'RB', 'DB', 'LB', 'RUSH', 'FLEX'])
+export const PlayerPosition = z.enum(['QB', 'WR', 'RB', 'DB', 'LB', 'RUSH', 'FLEX'])
 
 // Base schemas
 export const SeasonSchema = z.object({
@@ -33,8 +33,8 @@ export const PlayerSchema = z.object({
   last_name: z.string().min(1, 'Last name is required'),
   email: z.string().email().optional(),
   phone: z.string().optional(),
-  primary_position: Position.optional(),
-  secondary_position: Position.optional(),
+  primary_position: PlayerPosition.optional(),
+  secondary_position: PlayerPosition.optional(),
   avatar_url: z.string().url().optional(),
   created_at: z.string().datetime().optional(),
 })
@@ -217,7 +217,7 @@ export const DraftImportRowSchema = z.object({
   overall_pick: z.number().int().positive('Overall pick must be positive'),
   player_first: z.string().min(1, 'First name is required'),
   player_last: z.string().min(1, 'Last name is required'),
-  primary_position: Position,
+  primary_position: PlayerPosition,
   email: z.string().email().optional(),
   phone: z.string().optional(),
   notes: z.string().optional(),

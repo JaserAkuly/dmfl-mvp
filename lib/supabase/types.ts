@@ -287,8 +287,8 @@ export type Database = {
           id: string
           last_name: string
           phone: string | null
-          primary_position: Database["public"]["Enums"]["position"] | null
-          secondary_position: Database["public"]["Enums"]["position"] | null
+          primary_position: Database["public"]["Enums"]["player_position"] | null
+          secondary_position: Database["public"]["Enums"]["player_position"] | null
         }
         Insert: {
           avatar_url?: string | null
@@ -298,8 +298,8 @@ export type Database = {
           id?: string
           last_name: string
           phone?: string | null
-          primary_position?: Database["public"]["Enums"]["position"] | null
-          secondary_position?: Database["public"]["Enums"]["position"] | null
+          primary_position?: Database["public"]["Enums"]["player_position"] | null
+          secondary_position?: Database["public"]["Enums"]["player_position"] | null
         }
         Update: {
           avatar_url?: string | null
@@ -309,8 +309,8 @@ export type Database = {
           id?: string
           last_name?: string
           phone?: string | null
-          primary_position?: Database["public"]["Enums"]["position"] | null
-          secondary_position?: Database["public"]["Enums"]["position"] | null
+          primary_position?: Database["public"]["Enums"]["player_position"] | null
+          secondary_position?: Database["public"]["Enums"]["player_position"] | null
         }
         Relationships: []
       }
@@ -529,7 +529,7 @@ export type Database = {
           games_played: number | null
           last_name: string | null
           player_id: string | null
-          primary_position: Database["public"]["Enums"]["position"] | null
+          primary_position: Database["public"]["Enums"]["player_position"] | null
           season_id: string | null
           season_name: string | null
           stat_value: number | null
@@ -551,7 +551,7 @@ export type Database = {
           interceptions: number | null
           last_name: string | null
           player_id: string | null
-          primary_position: Database["public"]["Enums"]["position"] | null
+          primary_position: Database["public"]["Enums"]["player_position"] | null
           sacks: number | null
           safeties: number | null
           season_id: string | null
@@ -576,7 +576,7 @@ export type Database = {
           pass_tds: number | null
           pass_yds: number | null
           player_id: string | null
-          primary_position: Database["public"]["Enums"]["position"] | null
+          primary_position: Database["public"]["Enums"]["player_position"] | null
           rec_avg: number | null
           rec_tds: number | null
           rec_yds: number | null
@@ -629,7 +629,7 @@ export type Database = {
     Enums: {
       game_status: "scheduled" | "live" | "final" | "postponed"
       player_role: "captain" | "co_captain" | "player"
-      position: "QB" | "WR" | "RB" | "DB" | "LB" | "RUSH" | "FLEX"
+      player_position: "QB" | "WR" | "RB" | "DB" | "LB" | "RUSH" | "FLEX"
     }
     CompositeTypes: {
       [_ in never]: never
