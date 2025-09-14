@@ -153,16 +153,44 @@ export const RosterInputSchema = RosterSchema.omit({
   created_at: true 
 })
 
-export const GameInputSchema = GameSchema.omit({ 
-  id: true, 
-  created_at: true, 
-  updated_at: true 
+export const GameInputSchema = z.object({
+  season_id: z.string().uuid(),
+  week: z.number().int().positive(),
+  kickoff_at: z.string().datetime(),
+  location: z.string().optional(),
+  status: GameStatus.default('scheduled'),
+  home_team_id: z.string().uuid(),
+  away_team_id: z.string().uuid(),
+  home_score: z.number().int().min(0).default(0),
+  away_score: z.number().int().min(0).default(0),
+}).refine((data) => data.home_team_id !== data.away_team_id, {
+  message: "Home and away teams must be different",
+  path: ["away_team_id"],
 })
 
-export const PlayerStatsOffenseInputSchema = PlayerStatsOffenseSchema.omit({ 
-  id: true, 
-  created_at: true, 
-  updated_at: true 
+export const PlayerStatsOffenseInputSchema = z.object({
+  game_id: z.string().uuid(),
+  team_id: z.string().uuid(),
+  player_id: z.string().uuid(),
+  pass_att: z.number().int().min(0).default(0),
+  pass_comp: z.number().int().min(0).default(0),
+  pass_yds: z.number().int().default(0),
+  pass_tds: z.number().int().min(0).default(0),
+  ints_thrown: z.number().int().min(0).default(0),
+  rush_att: z.number().int().min(0).default(0),
+  rush_yds: z.number().int().default(0),
+  rush_tds: z.number().int().min(0).default(0),
+  receptions: z.number().int().min(0).default(0),
+  targets: z.number().int().min(0).default(0),
+  rec_yds: z.number().int().default(0),
+  rec_tds: z.number().int().min(0).default(0),
+  two_pts: z.number().int().min(0).default(0),
+}).refine((data) => data.pass_comp <= data.pass_att, {
+  message: "Completions cannot exceed attempts",
+  path: ["pass_comp"],
+}).refine((data) => data.receptions <= data.targets, {
+  message: "Receptions cannot exceed targets",
+  path: ["receptions"],
 })
 
 export const PlayerStatsDefenseInputSchema = PlayerStatsDefenseSchema.omit({ 
